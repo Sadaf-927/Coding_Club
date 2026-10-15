@@ -1,0 +1,106 @@
+<% layout('layouts/boilerplate') -%>
+
+<!-- 1. Full-Width Background Video Hero Section -->
+        <div class="position-relative overflow-hidden border-bottom border-secondary border-opacity-25 d-flex align-items-center justify-content-center w-100" style="min-height: 80vh;"></div>
+    <!-- Background Video with Low Opacity -->
+    <video autoplay loop muted playsinline class="position-absolute w-100 h-100" style="top: 0; left: 0; object-fit: cover; opacity: 0.25; z-index: 0;">
+        <source src="/videos/hero-animation.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Foreground Content (Text & Buttons) -->
+    <div class="container position-relative text-center" style="z-index: 1;">
+        <span class="badge bg-danger mb-3 px-3 py-2 text-uppercase tracking-wide shadow">Rajkiya Engineering College, Azamgarh</span>
+        
+        <h1 class="display-2 fw-bolder text-white mb-2 text-shadow">CODE <span class="text-danger">SASTRA</span></h1>
+        <p class="lead text-light mb-4 fs-3 text-shadow">CREATE &bull; CONQUER</p>
+        
+        <!-- Coding Animation Container -->
+        <div class="bg-black bg-opacity-75 p-3 rounded text-start border border-secondary border-opacity-50 shadow-lg mx-auto mb-4 backdrop-blur" style="max-width: 550px; font-family: 'Fira Code', monospace;">
+            <span class="text-success">clubadmin@rec:~$</span> <span id="typing-text" class="text-light"></span><span class="blink text-light">_</span>
+        </div>
+        
+        <div class="mt-4">
+            <a href="/events" class="btn btn-danger btn-lg px-5 py-3 rounded-pill fw-bold me-2 shadow transition-hover">Explore Challenges</a>
+            <a href="#about-club" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill transition-hover bg-black bg-opacity-50 backdrop-blur">Learn More</a>
+        </div>
+    </div>
+</div>
+
+<!-- 2. "By The Numbers" Engagement Ribbon -->
+<div class="container">
+    <div class="row text-center my-5 py-4 bg-black border border-secondary border-opacity-25 rounded-4 shadow-sm" id="about-club">
+        <div class="col-md-4 mb-3 mb-md-0 border-end border-secondary border-opacity-25">
+            <h2 class="display-4 fw-bolder text-danger mb-0">12<span class="fs-4">hr</span></h2>
+            <p class="text-secondary fw-semibold text-uppercase tracking-wide mb-0">Coding Marathon</p>
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0 border-end border-secondary border-opacity-25">
+            <h2 class="display-4 fw-bolder text-white mb-0">08+</h2>
+            <p class="text-secondary fw-semibold text-uppercase tracking-wide mb-0">Technical Events</p>
+        </div>
+        <div class="col-md-4">
+            <h2 class="display-4 fw-bolder text-danger mb-0">300+</h2>
+            <p class="text-secondary fw-semibold text-uppercase tracking-wide mb-0">Tech Innovators</p>
+        </div>
+    </div>
+</div>
+
+<!-- 3. Upcoming Events Preview -->
+<div class="container mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-white fw-bold mb-0">Featured Challenges</h3>
+        <a href="/events" class="text-danger text-decoration-none fw-semibold">View All Catalogue &rarr;</a>
+    </div>
+    
+    <div class="row g-4">
+        <% events.forEach(event => { %>
+            <div class="col-md-4">
+                <div class="card h-100 bg-black border-secondary border-opacity-25 shadow-sm transition-hover">
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-danger mb-2 align-self-start"><%= event.category %></span>
+                        <h5 class="card-title text-white mt-2"><%= event.title %></h5>
+                        <p class="card-text text-secondary small flex-grow-1"><%= event.tagline %></p>
+                        <a href="/events/<%= event._id %>" class="btn btn-sm btn-outline-light w-100 mt-3">View Details</a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<!-- 4. Community CTA Banner -->
+<div class="container">
+    <div class="bg-black border border-danger border-opacity-50 rounded-4 p-5 text-center mb-5 position-relative overflow-hidden shadow">
+        <div class="position-relative z-index-1">
+            <h2 class="fw-bold text-white mb-3">Join the REC Tech Community</h2>
+            <p class="text-secondary mb-4 max-w-600 mx-auto">Don't miss out on upcoming hackathons, workshops, and placement prep. Connect with fellow developers at Rajkiya Engineering College.</p>
+            <a href="#" class="btn btn-danger px-5 py-2 fw-bold rounded-pill transition-hover">Join WhatsApp Group</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Typing Animation Script
+    const text = "npm run init-code-sastra && start building_future...";
+    let index = 0;
+    function type() {
+        if (index < text.length) {
+            document.getElementById("typing-text").innerHTML += text.charAt(index);
+            index++;
+            setTimeout(type, 50);
+        }
+    }
+    window.onload = type;
+</script>
+
+<style> 
+    .blink { animation: blinker 1s linear infinite; } 
+    @keyframes blinker { 50% { opacity: 0; } } 
+    
+    .transition-hover { transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+    .transition-hover:hover { transform: translateY(-3px); border-color: #d90429 !important; box-shadow: 0 10px 20px rgba(217, 4, 41, 0.2) !important; }
+    
+    .tracking-wide { letter-spacing: 1px; }
+    .text-shadow { text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+    .backdrop-blur { backdrop-filter: blur(8px); }
+</style>

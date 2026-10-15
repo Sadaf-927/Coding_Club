@@ -1,0 +1,49 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold text-white mb-1">Participant Registrations</h2>
+        <p class="text-secondary mb-0">Total entries: <%= registrations.length %></p>
+    </div>
+    <a href="/" class="btn btn-outline-light btn-sm">&larr; Back to Public Site</a>
+</div>
+
+<div class="table-responsive bg-black border border-secondary border-opacity-25 rounded p-3 shadow-sm">
+    <table class="table table-dark table-hover mb-0 align-middle">
+        <thead>
+            <tr class="text-secondary small text-uppercase">
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Roll No</th>
+                <th>Branch / Year</th>
+                <th>Event</th>
+                <th>Team</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (registrations.length === 0) { %>
+                <tr>
+                    <td colspan="8" class="text-center py-4 text-secondary">No registrations recorded yet.</td>
+                </tr>
+            <% } %>
+            <% registrations.forEach((reg, index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td class="fw-semibold text-white"><%= reg.fullName %></td>
+                    <td><%= reg.email %></td>
+                    <td><%= reg.collegeRollNo %></td>
+                    <td><%= reg.branchYear %></td>
+                    <td>
+                        <span class="badge bg-danger">
+                            <%= reg.eventId ? reg.eventId.title : 'Event Unavailable' %>
+                        </span>
+                    </td>
+                    <td><%= reg.teamName %></td>
+                    <td class="small text-secondary"><%= new Date(reg.registeredAt).toLocaleDateString() %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

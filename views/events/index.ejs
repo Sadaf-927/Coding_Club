@@ -1,0 +1,45 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="container py-4">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-white">Event Catalogue</h1>
+        <p class="text-secondary">Browse all individual and team challenges</p>
+    </div>
+
+    <!-- Active Events Section -->
+    <div class="mb-5">
+        <h3 class="text-white fw-bold border-bottom border-secondary border-opacity-25 pb-2 mb-4">Upcoming Events</h3>
+        <div class="row g-4">
+            <% events.forEach(event => { %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 bg-black border-secondary border-opacity-25 shadow-sm transition-hover">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge <%= event.category.includes('Team') ? 'bg-danger' : 'bg-primary' %>">
+                                    <%= event.category %>
+                                </span>
+                                <small class="text-secondary"><%= event.duration %></small>
+                            </div>
+                            <h4 class="card-title text-white mt-2"><%= event.title %></h4>
+                            <p class="card-text text-secondary flex-grow-1 mt-2"><%= event.description %></p>
+                            <a href="/events/<%= event._id %>" class="btn btn-danger mt-3 w-100 fw-semibold">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <!-- Past Events Section -->
+    <div class="mb-5 opacity-75">
+        <h3 class="text-white fw-bold border-bottom border-secondary border-opacity-25 pb-2 mb-4">Past Events</h3>
+        <div class="alert bg-black border border-secondary border-opacity-25 text-secondary text-center py-4">
+            Previous event records and winners will be updated here after Code Sastra concludes.
+        </div>
+    </div>
+</div>
+
+<style>
+    .transition-hover { transition: transform 0.2s ease, border-color 0.2s ease; }
+    .transition-hover:hover { transform: translateY(-3px); border-color: #d90429 !important; }
+</style>

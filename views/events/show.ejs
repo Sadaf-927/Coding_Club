@@ -1,0 +1,54 @@
+<% layout('layouts/boilerplate') -%>
+
+<div class="row g-5 justify-content-between">
+    <!-- Left Side: Rules -->
+    <div class="col-lg-6">
+        <a href="/" class="text-decoration-none text-secondary mb-3 d-inline-block">&larr; Back to Events</a>
+        <br>
+        <span class="badge bg-danger mb-2"><%= event.category %></span>
+        <h1 class="display-4 fw-bold"><%= event.title %></h1>
+        <p class="text-danger lead"><%= event.tagline %></p>
+        <hr class="border-secondary border-opacity-25">
+
+        <h5 class="mt-4">Format & Description</h5>
+        <p class="text-secondary"><%= event.description %></p>
+
+        <h5 class="mt-4">Duration</h5>
+        <p class="text-secondary"><%= event.duration %></p>
+    </div>
+
+    <!-- Right Side: Registration Form -->
+    <div class="col-lg-5">
+        <div class="card bg-black border-secondary border-opacity-25 p-4 shadow">
+            <h4 class="mb-4">Register for <%= event.title %></h4>
+            <form action="/events/<%= event._id %>/register" method="POST">
+                <div class="mb-3">
+                    <label for="fullName" class="form-label text-secondary small">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" name="fullName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label text-secondary small">College Email ID</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="collegeRollNo" class="form-label text-secondary small">Roll Number</label>
+                    <input type="text" class="form-control" id="collegeRollNo" name="collegeRollNo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="branchYear" class="form-label text-secondary small">Branch & Year</label>
+                    <input type="text" class="form-control" id="branchYear" name="branchYear" placeholder="e.g. CSE - 2nd Year" required>
+                </div>
+                
+                <!-- Conditional Team Name Field -->
+                <% if (event.category.includes('Team')) { %>
+                    <div class="mb-3">
+                        <label for="teamName" class="form-label text-secondary small">Team Name</label>
+                        <input type="text" class="form-control" id="teamName" name="teamName" placeholder="Enter Team Name" required>
+                    </div>
+                <% } %>
+
+                <button type="submit" class="btn btn-danger w-100 py-2 mt-3 fw-bold">Confirm Registration</button>
+            </form>
+        </div>
+    </div>
+</div>
